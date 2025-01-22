@@ -25,4 +25,31 @@ console.log(50);
     p2.catch((error)=> console.log(error))
     p2.finally(()=> console.log("finally for both "))
 
+
+
+//! https://jsonplaceholder.typicode.com/user
+function fetchUsers()
+{
+    let response = fetch("https://jsonplaceholder.typicode.com/users");
+    // console.log(response);
+    response.then(result=>{
+        //console.log(result.json());
+        return result.json().then(data=>{
+            console.log(data);
+            data.map(user=>{
+                //console.log(user);
+                StorageEvent.innerHTML += `
+                <tr></tr>
+                <td>${user.id}</td>
+                <td>${user.name}</td>
+                <td>${user.email}</td>
+                <td>${user.company}</td>
+                </tr>
+                `
+
+        })
+    })
 })
+    .catch(err=>console.log(err))
+}
+fetchUsers();
